@@ -2,6 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://applyasap-api.thebatman3934.workers.dev/";
+const IPIFY_URL =
+  import.meta.env.VITE_IPIFY_URL || "https://api.ipify.org?format=json";
+const COOKIE_KEY = import.meta.env.VITE_COOKIE_KEY || "applyasap_uses";
 
 const LIMIT = 10;
 
@@ -14,20 +20,50 @@ const defaultForm = {
   question: "",
 };
 
+function withTimeout(promise, timeoutMs, timeoutMessage) {
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(timeoutMessage));
+    }, timeoutMs);
+  });
+
+  return Promise.race([promise, timeoutPromise]).finally(() => {
+    clearTimeout(timeoutId);
+  });
+}
+
 async function extractTextFromPdf(file) {
   const arrayBuffer = await file.arrayBuffer();
-  const pdf = await getDocument({ data: arrayBuffer }).promise;
+  const loadingTask = getDocument({ data: arrayBuffer });
+  const pdf = await withTimeout(
+    loadingTask.promise,
+    15000,
+    "PDF loading timed out. Please try a smaller or text-based PDF.",
+  );
   const pageTexts = [];
 
-  for (let pageIndex = 1; pageIndex <= pdf.numPages; pageIndex += 1) {
-    const page = await pdf.getPage(pageIndex);
-    const textContent = await page.getTextContent();
-    const pageText = textContent.items
-      .map((item) => (typeof item.str === "string" ? item.str : ""))
-      .join(" ")
-      .replace(/\s+/g, " ")
-      .trim();
-    pageTexts.push(pageText);
+  try {
+    for (let pageIndex = 1; pageIndex <= pdf.numPages; pageIndex += 1) {
+      const page = await withTimeout(
+        pdf.getPage(pageIndex),
+        10000,
+        `Reading page ${pageIndex} timed out.`,
+      );
+      const textContent = await withTimeout(
+        page.getTextContent(),
+        10000,
+        `Extracting text from page ${pageIndex} timed out.`,
+      );
+      const pageText = textContent.items
+        .map((item) => (typeof item.str === "string" ? item.str : ""))
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+      pageTexts.push(pageText);
+    }
+  } finally {
+    await loadingTask.destroy();
   }
 
   return pageTexts.join("\n").trim();
