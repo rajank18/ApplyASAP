@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: #3f3f46 #09090b;
+  scrollbar-width: thin;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.12), transparent 35%),
+    radial-gradient(circle at 90% 100%, rgba(0, 0, 0, 0.18), transparent 35%),
+    #3f3f46;
+  transition: background 220ms ease;
+}
+
+html.dark body {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.07), transparent 35%),
+    radial-gradient(circle at 90% 100%, rgba(255, 255, 255, 0.05), transparent 35%),
+    #09090b;
+}
+
+/* Smooth black/gray scrollbar */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #52525b, #3f3f46);
+  border: 2px solid #09090b;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #71717a, #52525b);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
