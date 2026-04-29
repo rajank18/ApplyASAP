@@ -231,6 +231,36 @@ function App() {
     return result.trim().split(/\s+/).length;
   }, [result]);
 
+  const mobileChaiButton = (
+    <a
+      href="https://buymeachai.ezee.li/rajank18"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Buy Me A Chai"
+      className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-4 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="h-4 w-4 text-amber-500 dark:text-amber-300"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
+        <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
+        <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
+        <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
+        <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
+      </svg>
+      <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
+        Buy Me A Chai
+      </span>
+    </a>
+  );
+
   const handleThemeToggle = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
@@ -532,36 +562,11 @@ STYLE:
           </section>
         ) : null}
 
-        
-            <div className="mt-4 mb-4 flex justify-center md:hidden">
-              <a
-                href="https://buymeachai.ezee.li/rajank18"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Buy Me A Chai"
-                className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-4 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-4 w-4 text-amber-500 dark:text-amber-300"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
-                  <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
-                  <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
-                  <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
-                  <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
-                </svg>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
-                  Buy Me A Chai
-                </span>
-              </a>
-            </div>
+        {result ? (
+          <div className="mt-4 mb-4 flex justify-center md:hidden">
+            {mobileChaiButton}
+          </div>
+        ) : null}
 
         <section id="generator" className="animate-fadeInUp [animation-delay:100ms] [animation-fill-mode:both]">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -703,33 +708,7 @@ STYLE:
 
             {!result ? (
               <div className="mt-4 flex justify-center md:hidden">
-                <a
-                  href="https://buymeachai.ezee.li/rajank18"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Buy Me A Chai"
-                  className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-4 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    className="h-4 w-4 text-amber-500 dark:text-amber-300"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
-                    <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
-                    <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
-                    <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
-                    <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
-                  </svg>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
-                    Buy Me A Chai
-                  </span>
-                </a>
+                {mobileChaiButton}
               </div>
             ) : null}
           </form>
