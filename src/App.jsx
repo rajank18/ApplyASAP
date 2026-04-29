@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
@@ -148,6 +148,7 @@ function App() {
   const [fpUses, setFpUses] = useState(0);
   const [cookieUses, setCookieUses] = useState(0);
   const [ipUses, setIpUses] = useState(0);
+  const resultRef = useRef(null);
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("applyasap_theme");
@@ -202,6 +203,19 @@ function App() {
     const timeout = setTimeout(() => setCopied(false), 2000);
     return () => clearTimeout(timeout);
   }, [copied]);
+
+  useEffect(() => {
+    if (!result) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [result]);
 
   const highestUsage = useMemo(
     () => Math.max(fpUses, cookieUses, ipUses),
@@ -447,7 +461,7 @@ STYLE:
         <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-zinc-500/15 blur-[130px]" />
       </div>
 
-      <div className="relative mx-auto max-w-[680px] px-4 py-6 sm:px-5 sm:py-10">
+      <main className="relative mx-auto max-w-[680px] px-4 py-6 sm:px-5 sm:py-10">
         <header className="mb-8 animate-fadeInUp border-b border-zinc-300/80 pb-6 dark:border-zinc-700/70">
           <div className="mb-4 flex items-center justify-between gap-3">
             <h1 className="font-['Space_Grotesk',_ui-sans-serif] text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -482,6 +496,7 @@ STYLE:
         {result ? (
           <section
             id="result"
+            ref={resultRef}
             className="mb-7 animate-fadeInUp border border-zinc-500/70 bg-zinc-200 p-4 shadow-panel backdrop-blur-sm sm:p-5 dark:border-zinc-700/70 dark:bg-zinc-900/80 dark:text-zinc-100"
           >
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -513,8 +528,40 @@ STYLE:
             >
               Generate Another
             </button>
+
           </section>
         ) : null}
+
+        
+            <div className="mt-4 mb-4 flex justify-center md:hidden">
+              <a
+                href="https://buymeachai.ezee.li/rajank18"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buy Me A Chai"
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-4 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4 text-amber-500 dark:text-amber-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
+                  <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
+                  <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
+                  <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
+                  <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
+                </svg>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
+                  Buy Me A Chai
+                </span>
+              </a>
+            </div>
 
         <section id="generator" className="animate-fadeInUp [animation-delay:100ms] [animation-fill-mode:both]">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -653,8 +700,41 @@ STYLE:
                 "Generate Answer"
               )}
             </button>
+
+            {!result ? (
+              <div className="mt-4 flex justify-center md:hidden">
+                <a
+                  href="https://buymeachai.ezee.li/rajank18"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Buy Me A Chai"
+                  className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-4 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    className="h-4 w-4 text-amber-500 dark:text-amber-300"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
+                    <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
+                    <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
+                    <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
+                    <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
+                  </svg>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
+                    Buy Me A Chai
+                  </span>
+                </a>
+              </div>
+            ) : null}
           </form>
         </section>
+
 
         <footer
           id="footer"
@@ -670,7 +750,35 @@ STYLE:
             Rajan
           </a>
         </footer>
-      </div>
+      </main>
+
+      <a
+        href="https://buymeachai.ezee.li/rajank18"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed right-2 top-1/2 z-50 hidden -translate-y-1/2 rounded-full border border-zinc-300/80 bg-zinc-100/90 px-3 py-2 text-zinc-900 shadow-lg shadow-black/10 backdrop-blur-md transition hover:scale-[1.03] hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/30 dark:hover:border-zinc-500 md:inline-flex sm:right-4"
+        aria-label="Buy Me A Chai"
+      >
+        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] sm:text-xs">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="h-4 w-4 text-amber-500 dark:text-amber-300"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 8h11v4a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V8Z" />
+            <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
+            <path d="M8 4c0 1 .5 1.5.5 2.5S8 8 8 8" />
+            <path d="M12 4c0 1 .5 1.5.5 2.5S12 8 12 8" />
+            <path d="M15 4c0 1 .5 1.5.5 2.5S15 8 15 8" />
+          </svg>
+          <span>Buy Me A Chai</span>
+        </span>
+      </a>
     </div>
   );
 }

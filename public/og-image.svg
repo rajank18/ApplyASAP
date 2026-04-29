@@ -1,0 +1,13 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="48" fill="#09090B"/>
+  <rect x="48" y="48" width="1104" height="534" rx="40" fill="#111115" stroke="#27272A" stroke-width="2"/>
+  <circle cx="1010" cy="146" r="110" fill="#FACC15" fill-opacity="0.12"/>
+  <circle cx="208" cy="472" r="150" fill="#FFFFFF" fill-opacity="0.06"/>
+  <text x="96" y="182" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="1">ApplyASAP</text>
+  <text x="96" y="255" fill="#A1A1AA" font-family="Arial, sans-serif" font-size="32" font-weight="400">AI job application answers in seconds</text>
+  <text x="96" y="336" fill="#E4E4E7" font-family="Arial, sans-serif" font-size="40" font-weight="600">Tailored. Human. Fast.</text>
+  <text x="96" y="398" fill="#A1A1AA" font-family="Arial, sans-serif" font-size="24" font-weight="400">Upload your resume, add the role, and generate polished responses.</text>
+  <rect x="96" y="466" width="292" height="74" rx="37" fill="#F4F4F5"/>
+  <text x="143" y="513" fill="#09090B" font-family="Arial, sans-serif" font-size="30" font-weight="700">ApplyASAP</text>
+  <path d="M960 160L912 258H958L934 350L1014 236H968L992 160Z" fill="none" stroke="#FACC15" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
